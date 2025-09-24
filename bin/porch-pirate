@@ -130,14 +130,15 @@ if(arguments.s):
 
     if(arguments.dump):
         workspaces = []
-        for result in search['data']:
-            try:
-                workspace = result['document']['workspaces']
-                for w in workspace:
-                    if w['id'] not in workspaces:
-                        workspaces.append(w['id'])
-            except:
-                pass
+        if 'data' in search:
+            for result in search['data']:
+                try:
+                    workspace = result['document']['workspaces']
+                    for w in workspace:
+                        if w['id'] not in workspaces:
+                            workspaces.append(w['id'])
+                except:
+                    pass
         for w in workspaces:
             try:
                 print(f"\n{YELLOW}[*]{END} Querying workspace ID {CYAN}{w}{END}\n")
